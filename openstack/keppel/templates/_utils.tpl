@@ -51,6 +51,11 @@
 - name:  KEPPEL_CLAIR_IGNORE_STALE_INDEX_REPORTS
   value: 'true' # The reindex loop is causing wide-ranging stability issues. Until the root cause is known, we're disabling it.
 {{- if .Values.keppel.clair.hostname }}
+- name:  KEPPEL_CLAIR_NOTIFICATION_SECRET
+  valueFrom:
+    secretKeyRef:
+      name: keppel-secret
+      key: clair_notification_secret
 - name:  KEPPEL_CLAIR_PRESHARED_KEY
   valueFrom:
     secretKeyRef:
