@@ -58,7 +58,7 @@
                 on(hostsystem) elasticsearch_octobus_tn_ccp_issue_hostsystem_doc_count
         labels:
           severity: info
-          service: compute
+          service: network
           tier: vmware
           support_group: compute
           no_alert_on_absence: "true"
