@@ -51,4 +51,21 @@
           summary: "An Error String related to Mellanox card issue with abort errors "
           description: "This alert is created to prevent the Outage from Mellanox card issue on {{ $labels.hostsystem }}"
 
+      - alert: TNControllerConnectivityDown
+        expr: >
+                vrops_hostsystem_runtime_connectionstate{state="connected"} and
+                on(hostsystem) vrops_hostsystem_runtime_maintenancestate{state="notInMaintenance"} and
+                on(hostsystem) elasticsearch_octobus_tn_ccp_issue_hostsystem_doc_count
+        labels:
+          severity: info
+          service: compute
+          tier: vmware
+          support_group: compute
+          no_alert_on_absence: "true"
+          meta: "Alert for NSXT TN Controller Connectivity Down"
+          playbook: docs/devops/alert/nsxt/#troubleshooting-transport-node-controller-status-unknown-in-nsx-t
+        annotations:
+          summary: "An Error String related to nsxt tn controller connectivity lost with CCP "
+          description: "This alert is created to prevent the issue with newly created vm/vm migrated to this host in this state {{ $labels.hostsystem }}"
+
   
